@@ -1,0 +1,10 @@
+nohup php process.eth.blocks.php 0 10 > /tmp/p0.php &
+nohup php process.eth.blocks.php 1 10 > /tmp/p1.php &
+nohup php process.eth.blocks.php 2 10 > /tmp/p2.php &
+nohup php process.eth.blocks.php 3 10 > /tmp/p3.php &
+nohup php process.eth.blocks.php 4 10 > /tmp/p4.php &
+nohup php process.eth.blocks.php 5 10 > /tmp/p5.php &
+nohup php process.eth.blocks.php 6 10 > /tmp/p6.php &
+nohup php process.eth.blocks.php 7 10 > /tmp/p7.php &
+nohup php process.eth.blocks.php 8 10 > /tmp/p8.php &
+nohup php process.eth.blocks.php 9 10 > /tmp/p9.php &

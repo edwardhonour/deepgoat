@@ -1,0 +1,1 @@
+			$post['BALANCE']=$this->convertBigNumber($a['TokenQuantity'],$a['TokenDivisor']);
