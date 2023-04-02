@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Lookup Tool Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container">
+  <h2>Lookup Tool Demo</h2>
+<section class="pb-4">
+    <div class="bg-white border rounded-5">
+
+      <section class="w-100 p-4 text-center pb-4">
+        <form>
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="row mb-4">
+            <div class="col-3">
+              <div class="form-outline">
+			                  <label class="form-label" for="form6Example1" style="margin-left: 0px; text-align:left">Zip Code</label>
+                <input type="text" id="form6Example1" class="form-control"  style="width:180px;">
+              <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 68.8px;"></div><div class="form-notch-trailing"></div></div>
+			  </div>
+			  <div class="row" style="margin-top:10px;">	
+              <div class="col-6">
+			      <button type="button" onclick="get_zipcode();" class="btn btn-primary btn-block mb-4">Lookup Zipcode</button>	
+			  </div>
+			  <div class="col-6"></div>
+			  
+			  </div>
+            </div>
+            <div class="col-9">
+              <div class="form-outline">
+               <label class="form-label" for="form6Example1" value="0610216" style="margin-left: 0px;">MAC Locality</label>
+                <input type="text" id="mac" class="form-control"  style="width:180px;">
+               <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 68.8px;"></div><div class="form-notch-trailing"></div></div>
+			  </div>
+			  
+            </div>
+          </div>
+          <div class="row mb-4">
+            <div class="col-3">
+              <div class="form-outline">
+			    <label class="form-label" for="form6Example1" style="margin-left: 0px;">HCPCS Codee</label>
+                <input type="text" id="code" class="form-control" style="width:180px;">
+              <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 68.8px;"></div><div class="form-notch-trailing"></div></div>
+			  </div>
+			  <div class="row" style="margin-top:10px;">	
+			                <div class="col-6">
+			      <button type="button" onclick="get_pricing();" class="btn btn-primary btn-block mb-4">Lookup Procedure</button>	
+			  </div>
+              <div class="col-6"></div>			  
+			  </div>		  
+            </div>
+            <div class="col-9">
+
+		<table class="table table-condensed" style="width:400px; display:none" id="r">
+<tr>
+<th style="font-size:12px; text-align:left">Value</th>
+<th style="font-size:12px; text-align:left">Result</th>
+</tr>
+			
+<tr>
+<td style="font-size:12px; text-align:left">hcpc</td>
+<td id="hcpc" style="font-size:12px; text-align:left"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">modifier</td>
+<td id="modifier" style="font-size:12px; text-align:left"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">proc_stat</td>
+<td style="font-size:12px; text-align:left" id="proc_stat"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">pctc</td>
+<td style="font-size:12px; text-align:left" id="pctc"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">nused_for_med</td>
+<td style="font-size:12px; text-align:left" id="nused_for_med"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">rvu_work</td>
+<td style="font-size:12px; text-align:left" id="rvu_work"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>trans_nfac_pe_naflag</td>
+<td style="font-size:12px; text-align:left" id="trans_nfac_pe_naflag"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>trans_nfac_pe</td>
+<td style="font-size:12px; text-align:left" id="trans_nfac_pe"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>full_nfac_pe_naflag</td>
+<td style="font-size:12px; text-align:left" id="full_nfac_pe_naflag"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>full_nfac_pe</td>
+<td style="font-size:12px; text-align:left" id="ull_nfac_pe"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>trans_fac_pe_naflag</td>
+<td style="font-size:12px; text-align:left" id="trans_fac_pe_naflag"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>trans_fac_pe</td>
+<td style="font-size:12px; text-align:left" id="trans_fac_pe"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>full_fac_pe_naflag</td>
+<td style="font-size:12px; text-align:left" id="full_fac_pe_naflag"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>full_fac_pe</td>
+<td style="font-size:12px; text-align:left" id="full_fac_pe"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>rvu_mp</td>
+<td style="font-size:12px; text-align:left" id="rvu_mp"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>opps_nfac_pe</td>
+<td style="font-size:12px; text-align:left" id="opps_nfac_pe"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>opps_fac_pe</td>
+<td style="font-size:12px; text-align:left" id="opps_mp"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>opps_mp</td>
+<td style="font-size:12px; text-align:left" id="opps_mp"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>global</td>
+<td style="font-size:12px; text-align:left" id="global"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>mult_surg</td>
+<td style="font-size:12px; text-align:left" id="mult_surg"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>bilt_surg</td>
+<td style="font-size:12px; text-align:left" id="bilt_sur"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>asst_surg</td>
+<td style="font-size:12px; text-align:left" id="asst_surg"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>co_surg</td>
+<td style="font-size:12px; text-align:left" id="co_surg"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>team_surg</td>
+<td style="font-size:12px; text-align:left" id="team_surg"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>phy_superv</td>
+<td style="font-size:12px; text-align:left" id="phy_superv"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td>family_ind</td>
+<td style="font-size:12px; text-align:left" id="family_ind"></td>
+</tr>
+<tr style="font-size:12px; text-align:left">
+<td style="font-size:12px; text-align:left">sdesc</td>
+<td style="font-size:12px; text-align:left" id="sdesc"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">conv_fact</td>
+<td style="font-size:12px; text-align:left" id="conv_fact"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">nfac_pe_naflag</td>
+<td style="font-size:12px; text-align:left" id="nfac_pe_naflag"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">fac_pe_naflag</td>
+<td style="font-size:12px; text-align:left" id="fac_pe_naflag"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">trans_nfac_total</td>
+<td style="font-size:12px; text-align:left" id="trans_nfac_total"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">trans_fac_total</td>
+<td style="font-size:12px; text-align:left" id="trans_fac_total"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">full_nfac_total</td>
+<td style="font-size:12px; text-align:left" id="full_nfac_total"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">full_fac_total</td>
+<td style="font-size:12px; text-align:left" id="full_fac_total"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">pre_op</td>
+<td style="font-size:12px; text-align:left" id="pre_op"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">intra_op</td>
+<td style="font-size:12px; text-align:left" id="intra_op"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">post_op</td>
+<td style="font-size:12px; text-align:left" id="post_op"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">endobase</td>
+<td style="font-size:12px; text-align:left" id="endobase"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">nfac_pe</td>
+<td style="font-size:12px; text-align:left" id="nfac_pe"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">fac_pe</td>
+<td style="font-size:12px; text-align:left" id="fac_pe"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">nfac_total</td>
+<td style="font-size:12px; text-align:left" id="nfac_total"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">fac_total</td>
+<td style="font-size:12px; text-align:left" id="fac_total"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">locality</td>
+<td style="font-size:12px; text-align:left" id="locality"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">mac</td>
+<td style="font-size:12px; text-align:left" id=">mac"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">gpci_work</td>
+<td style="font-size:12px; text-align:left" id="gpci_work"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">gpci_pe</td>
+<td style="font-size:12px; text-align:left" id="gpci_pe"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">gpci_mp</td>
+<td style="font-size:12px; text-align:left" id="gpci_mp"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">nfac_price</td>
+<td style="font-size:12px; text-align:left" id="nfac_price"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">fac_price</td>
+<td style="font-size:12px; text-align:left" id="fac_price"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">nfac_limiting_charge</td>
+<td style="font-size:12px; text-align:left" id="nfac_limiting_charge"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">fac_limiting_charge</td>
+<td style="font-size:12px; text-align:left" id="fac_limiting_charge"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">opps_nfac_pmt_amt</td>
+<td style="font-size:12px; text-align:left" id="opps_nfac_pmt_amt"></td>
+</tr>
+<tr>
+<td style="font-size:12px; text-align:left">opps_fac_pmt_amt</td>
+<td style="font-size:12px; text-align:left" id="opps_fac_pmt_amt"></td>
+</tr>
+</table>
+
+            </div>
+          </div>
+
+
+        </form>
+      </section>
+
+
+    </div>
+</section>
+<script>
+      function get_zipcode() {	  
+//		  $.get("https://hcpcs.codes/ajax/ZipToCarrier/?zip=60173&format=json&_=1638852544627", function(data, status){
+//		        alert("Data: " + data + "\nStatus: " + status);
+//        });  
+          $('#mac').val("0111205");
+	  }
+	  
+      function get_pricing() {	 
+	  
+	      var mac=$('#mac').val();
+		  var code=$('#code').val();
+		  var url="https://deepgoat.com/t.php";
+          var i="mac="+mac+"&code="+code;		  
+		  $.post(url,i).done(function(data, status){
+	    $("#hcpc").html(data['hcpc']);
+		$('#r').show();
+		$("#modifier").html(data['modifier']);
+		$("#proc_stat").html(data['proc_stat']);
+		$("#pctc").html(data['pctc']);
+		$("#nused_for_med").html(data['nused_for_med']);
+		$("#rvu_work").html(data['rvu_work']);
+		$("#trans_nfac_pe_naflag").html(data['trans_nfac_pe_naflag']);
+		$("#trans_nfac_pe").html(data['trans_nfac_pe']);
+		$("#full_nfac_pe_naflag").html(data['full_nfac_pe_naflag']);
+		$("#full_nfac_pe").html(data['full_nfac_pe']);
+		$("#trans_fac_pe_naflag").html(data['trans_fac_pe_naflag']);
+		$("#trans_fac_pe").html(data['trans_fac_pe']);
+		$("#full_fac_pe_naflag").html(data['full_fac_pe_naflag']);
+		$("#full_fac_pe").html(data['full_fac_pe']);
+		$("#rvu_mp").html(data['rvu_mp']);
+		$("#opps_nfac_pe").html(data['opps_nfac_pe']);
+		$("#opps_fac_pe").html(data['opps_fac_pe']);
+		$("#opps_mp").html(data['opps_mp']);
+		$("#global").html(data['global']);
+		$("#mult_surg").html(data['mult_surg']);
+		$("#bilt_surg").html(data['bilt_surg']);
+		$("#asst_surg").html(data['asst_surg']);
+		$("#co_surg").html(data['co_surg']);
+		$("#team_surg").html(data['team_surg']);
+		$("#phy_superv").html(data['phy_superv']);
+		$("#family_ind").html(data['family_ind']);
+		$("#sdesc").html(data['sdesc']);
+		$("#conv_fact").html(data['conv_fact']);
+		$("#nfac_pe_naflag").html(data['nfac_pe_naflag']);
+		$("#fac_pe_naflag").html(data['fac_pe_naflag']);
+		$("#trans_nfac_total").html(data['trans_nfac_total']);
+		$("#trans_fac_total").html(data['trans_fac_total']);
+		$("#full_nfac_total").html(data['full_nfac_total']);
+		$("#full_fac_total").html(data['full_fac_total']);
+		$("#pre_op").html(data['pre_op']);
+		$("#intra_op").html(data['intra_op']);
+		$("#post_op").html(data['post_op']);
+		$("#endobase").html(data['endobase']);
+		$("#nfac_pe").html(data['nfac_pe']);
+		$("#fac_pe").html(data['fac_pe']);
+		$("#nfac_total").html(data['nfac_total']);
+		$("#fac_total").html(data['fac_total']);
+		$("#locality").html(data['locality']);
+		$("#mac").html(data['mac']);
+		$("#gpci_work").html(data['gpci_work']);
+		$("#gpci_pe").html(data['gpci_pe']);
+		$("#gpci_mp").html(data['gpci_mp']);
+		$("#nfac_price").html(data['nfac_price']);
+		$("#fac_price").html(data['fac_price']);
+		$("#nfac_limiting_charge").html(data['nfac_limiting_charge']);
+		$("#fac_limiting_charge").html(data['fac_limiting_charge']);
+		$("#opps_nfac_pmt_amt").html(data['opps_nfac_pmt_amt']);
+		$("#opps_fac_pmt_amt").html(data['opps_fac_pmt_amt']);
+		$('#r').show();
+           });  
+	  }	  
+</script>
+
+
+

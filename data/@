@@ -1,0 +1,42 @@
+<?php
+
+class FORMS {
+
+	
+    function __construct() {
+
+    }
+    
+    function getBackgroundData($data) {
+       $output='{
+         "formData": {
+             "simpleinput": "",
+             "example-password": "",
+             "exampleFormControlInput1": "",
+             "exampleFormControlSelect1": "",
+             "exampleFormControlSelect2": "",
+             "formControlRange": "50",
+             "customRange3": "50",
+             "customFile": "",
+             "exampleReadOnly": "Readonly Value",
+             "example-disabled": "Disabled Value",
+             "example-static": "Static Text",
+             "example-helping": "Helping Text"
+         },
+         "TABLE_NAME":"EXAMPLE",
+         "KEY","ID",
+         "SEQUENCE","EXAMPLE_SEQ,
+         "select": [
+            {"value":"1", "name": "1"},
+            {"value":"2", "name": "2"},
+            {"value":"3", "name": "3"},
+            {"value":"4", "name": "4"},
+            {"value":"5", "name": "5"}
+         ]
+       }';
+       return json_decode($output,true);
+
+    }
+
+}
+

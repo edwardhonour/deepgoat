@@ -1,0 +1,17 @@
+<html>
+<head>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<div id="centercell"><a onclick="cc()">Centercell</a></div>
+  <script>
+  function cc() {
+    $('#centercell').load('file.html');
+
+    $('#centercell').load('file.php', function(response, status, xhr){
+         $('#centercell').append(status); 
+    });
+  }
+  </script>
+</body> 
+
